@@ -19,6 +19,31 @@ It provides :
 composer require novius/laravel-nova-contexts
 ```
 
+Add `LaravelNovaContexts` tool to `NovaServiceProvider`: 
+
+```php
+namespace App\Providers;
+
+use Illuminate\Support\Facades\Gate;
+use Laravel\Nova\Cards\Help;
+use Laravel\Nova\Nova;
+use Laravel\Nova\NovaApplicationServiceProvider;
+use Novius\LaravelNovaContexts\LaravelNovaContexts;
+
+class NovaServiceProvider extends NovaApplicationServiceProvider
+{
+    // ...
+    
+    public function tools()
+    {
+        return [
+            new LaravelNovaContexts(),
+        ];
+    }
+}
+
+```
+
 Override Nova Layout view to add context selector like bellow :
 
 ```blade
