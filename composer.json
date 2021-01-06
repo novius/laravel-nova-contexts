@@ -6,7 +6,7 @@
         "nova",
         "contexts"
     ],
-    "license": "AGPL-3.0-or-late",
+    "license": "AGPL-3.0-or-later",
     "require": {
         "php": ">=7.4.0",
         "illuminate/support": "^7.0|^8.0"
