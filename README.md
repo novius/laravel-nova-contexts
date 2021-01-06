@@ -96,7 +96,20 @@ class Page extends Model
 
 ## Nova resource field configuration
 
-You can add context field to your Nova resource's fields ;
+You can add context field to your Nova resource's fields:
+
+```php
+public function fields(Request $request)
+{
+    return [
+        // ...
+        
+        ContextField::make('locale'),
+        
+        // ...
+    ];
+}
+```
 
 ## Nova resource filter configuration
 
