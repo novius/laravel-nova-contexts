@@ -40,7 +40,7 @@ Override Nova Layout view to add context selector like bellow :
 Some options that you can override are available.
 
 ```sh
-php artisan vendor:publish --provider="Novius\LaravelNovaContexts\ToolServiceProvider" --tag="config"
+php artisan vendor:publish --provider="Novius\LaravelNovaContexts\LaravelNovaContextsServiceProvider" --tag="config"
 ```
 
 ## Models configuration
