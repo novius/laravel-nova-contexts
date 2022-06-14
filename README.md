@@ -4,60 +4,23 @@ This package allows you to manage resource contexts.
 
 It provides :
 
-* Default context choice during back-office navigation (on nova header).
+* Default context choice during back-office navigation (on nova card).
 * Context filter bases on default context.
 * Context field for resources.
 
 ## Requirements
 
-* PHP >= 7.4
-* Laravel Framework >= 7.0
+* PHP >= 8.0
+* Laravel Nova >= 4.0
+
+> **NOTE**: These instructions are for Laravel Nova >= 4.0. If you are using prior version, please
+> see the [previous version's docs](https://github.com/novius/laravel-nova-contexts/tree/1-x).
+
 
 ## Installation
 
 ```sh
 composer require novius/laravel-nova-contexts
-```
-
-Add `LaravelNovaContexts` tool to `NovaServiceProvider`: 
-
-```php
-namespace App\Providers;
-
-use Illuminate\Support\Facades\Gate;
-use Laravel\Nova\Cards\Help;
-use Laravel\Nova\Nova;
-use Laravel\Nova\NovaApplicationServiceProvider;
-use Novius\LaravelNovaContexts\LaravelNovaContexts;
-
-class NovaServiceProvider extends NovaApplicationServiceProvider
-{
-    // ...
-    
-    public function tools()
-    {
-        return [
-            new LaravelNovaContexts(),
-        ];
-    }
-}
-
-```
-
-Override Nova Layout view to add context selector like bellow :
-
-```blade
-{{-- resources/views/vendor/nova/layout.blade.php --}}
-
-@if (count(\Laravel\Nova\Nova::globallySearchableResources(request())) > 0)
-    <global-search dusk="global-search-component"></global-search>
-@endif
-
-<laravel-nova-context-selector></laravel-nova-context-selector>
-
-<dropdown class="ml-auto h-9 flex items-center dropdown-right">
-    @include('nova::partials.user')
-</dropdown>
 ```
 
 ## Configuration
@@ -66,6 +29,32 @@ Some options that you can override are available.
 
 ```sh
 php artisan vendor:publish --provider="Novius\LaravelNovaContexts\LaravelNovaContextsServiceProvider" --tag="config"
+```
+
+## Context selector
+
+A card is available to navigate between contexts. You can easily add it to custom resource index.
+
+```php
+<?php
+
+namespace App\Models;
+
+use Laravel\Nova;
+use Novius\LaravelNovaContexts\LaravelNovaContexts;
+
+class Page extends Resource
+{
+    // Some resources definitions...
+    
+    public function cards(Request $request)
+    {
+        return [
+            (new LaravelNovaContexts())->dynamicHeight(),
+        ];
+    }
+}
+
 ```
 
 ## Models configuration

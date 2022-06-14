@@ -1,5 +1,9 @@
-let mix = require('laravel-mix')
+let mix = require('laravel-mix');
 
-mix.setPublicPath('dist')
-    .js('resources/js/tool.js', 'js')
-    .sass('resources/sass/tool.scss', 'css')
+require('./nova.mix');
+
+mix
+  .setPublicPath('dist')
+  .js('resources/js/card.js', 'js')
+  .vue({ version: 3 })
+  .nova('novius/laravel-nova-contexts');

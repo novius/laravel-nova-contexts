@@ -4,8 +4,8 @@ namespace Novius\LaravelNovaContexts;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Nova\Events\ServingNova;
 use Laravel\Nova\Nova;
-use Novius\LaravelNovaContexts\Http\Middleware\Authorize;
 
 class LaravelNovaContextsServiceProvider extends ServiceProvider
 {
@@ -18,12 +18,10 @@ class LaravelNovaContextsServiceProvider extends ServiceProvider
     {
         $this->app->booted(function () {
             $this->routes();
-
-            Nova::translations(__DIR__.'/../resources/lang/'.app()->getLocale().'.json');
         });
 
         $this->publishes([__DIR__.'/../config' => config_path()], 'config');
-        $this->publishes([__DIR__.'/../resources/lang' => resource_path('lang/vendor/laravel-nova-contexts')], 'lang');
+        $this->publishes([__DIR__.'/../resources/lang' => lang_path('vendor/laravel-nova-contexts')], 'lang');
 
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'laravel-nova-contexts');
 
@@ -31,6 +29,12 @@ class LaravelNovaContextsServiceProvider extends ServiceProvider
 
         $this->app->singleton('context_manager', function ($app) {
             return new ContextManager($app['config']['context']);
+        });
+
+        Nova::serving(function (ServingNova $event) {
+            Nova::script('laravel-nova-contexts', __DIR__.'/../dist/js/card.js');
+
+            Nova::translations(__DIR__.'/../resources/lang/'.app()->getLocale().'.json');
         });
     }
 
@@ -45,7 +49,7 @@ class LaravelNovaContextsServiceProvider extends ServiceProvider
             return;
         }
 
-        Route::middleware(['nova', Authorize::class])
+        Route::middleware(['nova'])
                 ->prefix('nova-vendor/laravel-nova-contexts')
                 ->group(__DIR__.'/../routes/api.php');
     }

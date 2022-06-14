@@ -7,7 +7,7 @@ use Novius\Gli\Exceptions\ContextNotFoundException;
 
 class ContextManager
 {
-    const CONTEXT_KEY_ALL = 'all';
+    public const CONTEXT_KEY_ALL = 'all';
 
     /**
      * @var array

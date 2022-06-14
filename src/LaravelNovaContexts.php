@@ -2,19 +2,24 @@
 
 namespace Novius\LaravelNovaContexts;
 
-use Laravel\Nova\Nova;
-use Laravel\Nova\Tool;
+use Laravel\Nova\Card;
 
-class LaravelNovaContexts extends Tool
+class LaravelNovaContexts extends Card
 {
     /**
-     * Perform any tasks that need to happen when the tool is booted.
+     * The width of the card (1/3, 1/2, or full).
      *
-     * @return void
+     * @var string
      */
-    public function boot()
+    public $width = '1/3';
+
+    /**
+     * Get the component name for the element.
+     *
+     * @return string
+     */
+    public function component()
     {
-        Nova::script('laravel-nova-contexts', __DIR__.'/../dist/js/tool.js');
-        Nova::style('laravel-nova-contexts', __DIR__.'/../dist/css/tool.css');
+        return 'laravel-nova-context-selector';
     }
 }
