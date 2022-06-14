@@ -14,7 +14,7 @@ It provides :
 * Laravel Nova >= 4.0
 
 > **NOTE**: These instructions are for Laravel Nova >= 4.0. If you are using prior version, please
-> see the [previous version's docs](https://github.com/novius/laravel-nova-contexts/tree/1-x).
+> see the [previous version's docs](https://github.com/novius/laravel-nova-contexts/tree/1.x).
 
 
 ## Installation
