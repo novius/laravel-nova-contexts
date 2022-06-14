@@ -49,7 +49,7 @@ class LaravelNovaContextsServiceProvider extends ServiceProvider
             return;
         }
 
-        Route::middleware(['nova'])
+        Route::middleware(['nova:api'])
                 ->prefix('nova-vendor/laravel-nova-contexts')
                 ->group(__DIR__.'/../routes/api.php');
     }
